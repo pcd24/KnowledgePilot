@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from app.database import db
 app = FastAPI(
     title="KnowledgePilot API",
     description="Backend API for KnowledgePilot",
@@ -24,4 +25,11 @@ def home():
 def health():
     return {
         "status": "healthy"
+    }
+    
+@app.get("/db-test")
+def db_test():
+    return {
+        "database": db.name,
+        "status": "connected"
     }
